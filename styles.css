@@ -1,0 +1,280 @@
+/* add your CSS here */
+
+/* My CSS for the project */
+
+.border {
+	border-width: 1px;
+	border-color: DimGray;
+	border-style: solid;
+}
+
+.shadow {
+	-webkit-box-shadow: 14px 10px 8px 0px rgba(217,217,217,1);
+	-moz-box-shadow: 14px 10px 8px 0px rgba(217,217,217,1);
+	box-shadow: 14px 10px 8px 0px rgba(217,217,217,1);
+}
+
+.padded {
+	padding: 0 20px 20px 20px;
+}
+
+.animal-img {
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+.fact-box {
+	list-style-type: none;
+	padding: 0px;
+}
+
+.card {
+	width: 300px;
+}
+
+.card-title {
+	font-size: 2em;
+}
+
+
+/* 
+Experimenting with understanding advanced CSS usage in 
+https://github.com/ThisIsDallas/Simple-Grid/blob/master/simplegrid.css 
+*/
+
+/* The [] syntax is an attribute selector. 
+	What is an attirbute selector?
+	You are not restricted to the two special attributes, class and id. 
+	You can specify other attributes by using square brackets.
+
+	[attr*=value]
+	Represents an element with an attribute name of attr and whose value contains at least one occurrence of string "value" as substring.
+	[class*='grid']
+	Looks for any class that contains on occurence of the string 'grid'
+	
+
+	The : syntax is an Pseudo-classes selectors.
+	A CSS pseudo-class is a keyword added to selectors that specifies a special state of the element to be selected. 
+	List of Pseudo Classes
+	:link
+	:visited
+	:active
+	:hover
+	:focus
+	:first-child
+	:last-child
+	:nth-child
+	:nth-last-child
+	:nth-of-type
+	:first-of-type
+	:last-of-type
+	:empty
+	:target
+	:checked
+	:enabled
+	:disabled
+
+	Where is :after? Well it is not in the list, since it is actually a Pseduo Element
+	Just like pseudo-classes, pseudo-elements are added to selectors but instead of describing a special state, 
+	they allow you to style certain parts of a document. 
+	For example, the ::first-line pseudo-element targets only the first line of an element specified by the selector.
+
+	Note in CSS3, Pseudo Elements are identified with the '::' to differentiate between pseudo classes
+
+	Summary
+	The CSS ::after pseudo-element matches a virtual last child of the selected element.
+	It is typically used to add cosmetic content to an element by using the content CSS property. This element is inline by default.
+
+	Adds a border box to anythin after the .grid class.
+
+	[1] https://www.w3.org/community/webed/wiki/Advanced_CSS_selectors
+	[2] https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors
+	[3] https://developer.mozilla.org/en/docs/Web/CSS/::after
+ */
+[class*='grid'],
+[class*='col-'],
+[class*='mobile-'],
+.grid::after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;	
+}
+
+/* 
+
+*/
+[class*='col-'] {
+	float: left;
+  	min-height: 1px;
+	padding-right: 20px; /* column-space */
+}
+
+/* Pseudo class :last-child; 
+
+The :last-child CSS pseudo-class represents any element that is the last child element of its parent.
+Any col- class and its last child should have padding-right 0.
+
+[1] https://developer.mozilla.org/en-US/docs/Web/CSS/:last-child
+*/
+[class*='col-'] [class*='col-']:last-child {
+	padding-right: 0;
+}
+
+/*
+Makes the grid class 100%,
+hides overflow -> no scroll bars
+has a margin of top 0px, and uses auto to horizontally center the elemnt within its container.
+ */
+.grid {
+	width: 100%;
+	max-width: 1140px;
+	min-width: 748px; /* when using padded grid on ipad in portrait mode, width should be viewport-width - padding = (768 - 20) = 748. actually, it should be even smaller to allow for padding of grid containing element */
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+/* 
+Adds no content after the .grid class, but lets the element behave like a <table> element
+The clear property specifies on which sides of an element floating elements are not allowed to float.
+	No floating elements allowed on either the left or the right side immediately after .grid 
+*/
+.grid::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.grid-pad {
+	padding-top: 20px;
+	padding-left: 20px; /* grid-space to left */
+	padding-right: 0; /* grid-space to right: (grid-space-left - column-space) e.g. 20px-20px=0 */
+}
+
+.push-right {
+	float: right;
+}
+
+/* Content Columns */
+
+.col-1-1 {
+	width: 100%;
+}
+.col-2-3, .col-8-12 {
+	width: 66.66%;
+}
+
+.col-1-2, .col-6-12 {
+	width: 50%;
+}
+
+.col-1-3, .col-4-12 {
+	width: 33.33%;
+}
+
+.col-1-4, .col-3-12 {
+	width: 25%;
+}
+
+.col-1-5 {
+	width: 20%;
+}
+
+.col-1-6, .col-2-12 {
+	width: 16.667%;
+}
+
+.col-1-7 {
+	width: 14.28%;
+}
+
+.col-1-8 {
+	width: 12.5%;
+}
+
+.col-1-9 {
+	width: 11.1%;
+}
+
+.col-1-10 {
+	width: 10%;
+}
+
+.col-1-11 {
+	width: 9.09%;
+}
+
+.col-1-12 {
+	width: 8.33%
+}
+
+/* Layout Columns */
+
+.col-11-12 {
+	width: 91.66%
+}
+
+.col-10-12 {
+	width: 83.333%;
+}
+
+.col-9-12 {
+	width: 75%;
+}
+
+.col-5-12 {
+	width: 41.66%;
+}
+
+.col-7-12 {
+	width: 58.33%
+}
+
+/* Pushing blocks */
+
+.push-2-3, .push-8-12 {
+	margin-left: 66.66%;
+}
+
+.push-1-2, .push-6-12 {
+	margin-left: 50%;
+}
+
+.push-1-3, .push-4-12 {
+	margin-left: 33.33%;
+}
+
+.push-1-4, .push-3-12 {
+	margin-left: 25%;
+}
+
+.push-1-5 {
+	margin-left: 20%;
+}
+
+.push-1-6, .push-2-12 {
+	margin-left: 16.667%;
+}
+
+.push-1-7 {
+	margin-left: 14.28%;
+}
+
+.push-1-8 {
+	margin-left: 12.5%;
+}
+
+.push-1-9 {
+	margin-left: 11.1%;
+}
+
+.push-1-10 {
+	margin-left: 10%;
+}
+
+.push-1-11 {
+	margin-left: 9.09%;
+}
+
+.push-1-12 {
+	margin-left: 8.33%
+}
